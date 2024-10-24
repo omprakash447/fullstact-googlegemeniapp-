@@ -128,6 +128,9 @@ server.get("/userprompt/input",async(_req , res)=>{
 
 
 
+
+// deployeement....
+
 const path=require("path");
 const pathaccess=path.join(__dirname,"../../googlegemeni/build");
 server.use(express.static(pathaccess));
