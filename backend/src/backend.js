@@ -28,6 +28,9 @@ const PromptModel = new mongoose.model("prompt", promptSchema);
 // Routes
 
 // Home Page route
+server.get("/",(_req , res)=>{
+    res.sendFile(path.join(pathaccess,"index.html"));
+});
 
 // POST request for signup (User Registration)
 server.post("/gemeni/user", async (req, res) => {
