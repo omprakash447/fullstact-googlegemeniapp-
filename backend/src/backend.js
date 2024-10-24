@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const jwt=require("jsonwebtoken");
+port=process.env.PORT || 4000;
 
 // Importing database connection and model
 require("../dbconnection/db.js");
@@ -28,9 +28,6 @@ const PromptModel = new mongoose.model("prompt", promptSchema);
 // Routes
 
 // Home Page route
-server.get("/", (_req, res) => {
-    res.send("Hi, I am Om Prakash Lenka...");
-});
 
 // POST request for signup (User Registration)
 server.post("/gemeni/user", async (req, res) => {
@@ -126,9 +123,28 @@ server.get("/userprompt/input",async(_req , res)=>{
     }catch(err){
         res.status(404).send(err);
     }
-})
+});
+
+
+
+
+
+// deployeement....
+
+const path=require("path");
+const pathaccess=path.join(__dirname,"../../googlegemeni/build");
+server.use(express.static(pathaccess));
+console.log(pathaccess);
+server.get("/",(_req , res)=>{
+    res.sendFile(path.join(pathaccess,"index.html"));
+});
+server.get("*",(_req , res)=>{
+    res.sendFile(path.join(pathaccess,"index.html"));
+});
+
+
 
 // Server listening
-server.listen(4000, () => {
+server.listen(port, () => {
     console.log("Server running on port 4000...");
 });
